@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <header th:fragment="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <a th:href="@{/}">Кулинарная книга</a>
+            </div>
+            <div class="nav-menu">
+                <a th:href="@{/}">Главная</a>
+                <a th:href="@{/recipes}">Рецепты</a>
+                <a th:href="@{/management/cuisines}">Управление кухнями</a>
+                <a th:href="@{/management/categories}">Управление категориями</a>
+                <a th:href="@{/management/types}">Управление типами</a>
+                <a th:href="@{/users}">Пользователи</a>
+                <a th:href="@{/users/login}">Войти</a>
+            </div>
+        </nav>
+    </header>
+</body>
+</html>

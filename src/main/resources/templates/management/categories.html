@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Управление категориями</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <h1>Управление категориями</h1>
+    <h2>Добавить новую категорию</h2>
+    <form th:action="@{/management/categories/add}" th:object="${newCategory}" method="post">
+        <div class="form-group">
+            <label>Название категории (макс. 20 символов):</label>
+            <input type="text" th:field="*{name}" placeholder="Название категории" required maxlength="20">
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+    </form>
+
+    <h2>Список категорий</h2>
+    <div th:if="${#lists.isEmpty(categories)}" class="empty-state">
+        <p>Категорий пока нет</p>
+    </div>
+
+    <div th:unless="${#lists.isEmpty(categories)}" class="items-list">
+        <div th:each="category : ${categories}" class="item-card">
+            <h3 th:text="${category.name}"></h3>
+            <p>ID: <span th:text="${category.categoryId}"></span></p>
+            <a th:href="@{/management/categories/delete/{id}(id=${category.categoryId})}"
+               class="btn btn-danger btn-sm"
+               onclick="return confirm('Удалить эту категорию?')">
+                Удалить
+            </a>
+        </div>
+    </div>
+</div>
+
+
+</body>
+<div th:replace="fragments/footer :: footer"></div>
+</html>

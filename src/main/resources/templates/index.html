@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Кулинарная книга</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <h1>Добро пожаловать в кулинарную книгу!</h1>
+    <h2>Найдите и сохраните свои любимые рецепты</h2>
+
+    <div class="actions">
+        <div class="act">
+            <h2>Все Рецепты</h2>
+            <p>Погрузитесь в мир вкусов, исследуя нашу обширную коллекцию рецептов, от традиционных до экзотических.</p>
+            <a th:href="@{/recipes}" class="btn">Просмотреть</a></div>
+        <div class="act">
+            <h2>Добавить Рецепт</h2>
+            <p>Поделитесь своими уникальными кулинарными творениями с нашим сообществом и вдохновите других.</p>
+            <a th:href="@{/recipes/add}" class="btn">Добавить</a></div>
+        <div class="act">
+            <h2>Присоединиться к Нам</h2>
+            <p>Зарегистрируйтесь, чтобы сохранять любимые рецепты, создавать свои коллекции и общаться с другими поварами.</p>
+            <a th:href="@{/users/register}" class="btn">Регистрация</a></div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

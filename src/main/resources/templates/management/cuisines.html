@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Управление кухнями</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+    <h1>Управление кухнями</h1>
+    
+    <h2>Добавить новую кухню</h2>
+    <form th:action="@{/management/cuisines/add}" th:object="${newCuisine}" method="post">
+        <input type="text" th:field="*{name}" placeholder="Название кухни" required maxlength="20">
+        <button type="submit">Добавить</button>
+    </form>
+    
+    <h2>Список кухонь</h2>
+    <ul>
+        <li th:each="cuisine : ${cuisines}">
+            <span th:text="${cuisine.name}"></span>
+            <a th:href="@{/management/cuisines/delete/{id}(id=${cuisine.cuisineId})}">Удалить</a>
+        </li>
+    </ul>
+    
+    <a th:href="@{/recipes}">Назад к рецептам</a>
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${user.username + ' - Профиль'}"></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <div class="profile">
+        <h1>Профиль пользователя: <span th:text="${user.username}"></span></h1>
+
+        <div class="profile-info">
+            <div class="info-item">
+                <strong>Email:</strong> <span th:text="${user.email}"></span>
+            </div>
+            <div class="info-item">
+                <strong>ID:</strong> <span th:text="${user.userId}"></span>
+            </div>
+            <div class="info-item">
+                <strong>Количество рецептов:</strong> <span th:text="${#lists.size(user.recipes)}"></span>
+            </div>
+        </div>
+
+        <div th:if="${not #lists.isEmpty(user.recipes)}" class="user-recipes">
+            <h2>Рецепты пользователя</h2>
+            <div class="recipes-grid">
+                <div th:each="recipe : ${user.recipes}" class="recipe-card">
+                    <h3 th:text="${recipe.title}"></h3>
+                    <p class="description" th:text="${#strings.abbreviate(recipe.description, 100)}"></p>
+                    <a th:href="@{/recipes/{id}(id=${recipe.recipeId})}" class="btn btn-sm">Подробнее</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="profile-actions">
+            <a th:href="@{/users}" class="btn btn-outline">К списку пользователей</a>
+            <a th:href="@{/recipes}" class="btn btn-outline">К рецептам</a>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${recipe.title}"></title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div th:replace="fragments/header :: header"></div>
+    
+    <div class="container">
+        <div class="recipe-detail">
+            <h1 th:text="${recipe.title}"></h1>
+            
+            <div class="recipe-meta">
+                <span>Автор: <span th:text="${recipe.author.username}"></span></span>
+                <span>Кухня: <span th:text="${recipe.cuisine.name}"></span></span>
+                <span>Тип: <span th:text="${recipe.typeCooking.name}"></span></span>
+                <span>Категория: <span th:text="${recipe.category.name}"></span></span>
+                <span>Время: <span th:text="${recipe.cookingTime} + ' мин'"></span></span>
+                <span>Порции: <span th:text="${recipe.servings}"></span></span>
+                <span>Сложность: <span th:text="${recipe.difficulty}"></span></span>
+            </div>
+            
+            <div th:if="${recipe.description}" class="description">
+                <h3>Описание</h3>
+                <p th:text="${recipe.description}"></p>
+            </div>
+            
+            <div class="instructions">
+                <h3>Инструкции</h3>
+                <p th:text="${recipe.instructions}"></p>
+            </div>
+            
+            <div th:if="${not #lists.isEmpty(recipe.ingredients)}" class="ingredients">
+                <h3>Ингредиенты</h3>
+                <ul>
+                    <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient.name}"></li>
+                </ul>
+            </div>
+            
+            <div class="actions">
+                <a th:href="@{/recipes/edit/{id}(id=${recipe.recipeId})}" class="btn btn-secondary">Редактировать</a>
+                <a th:href="@{/recipes}" class="btn btn-outline">Назад к списку</a>
+            </div>
+        </div>
+    </div>
+    
+    <div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

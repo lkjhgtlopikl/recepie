@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Управление типами приготовления</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+    <h1>Управление типами приготовления</h1>
+
+    <h2>Добавить новый тип</h2>
+    <form th:action="@{/management/types/add}" th:object="${newType}" method="post">
+        <input type="text" th:field="*{name}" placeholder="Название типа" required maxlength="20">
+        <button type="submit">Добавить</button>
+    </form>
+    
+    <h2>Список типов</h2>
+    <ul>
+        <li th:each="type : ${types}">
+            <span th:text="${type.name}"></span>
+            <a th:href="@{/management/types/delete/{id}(id=${type.typeId})}">Удалить</a>
+        </li>
+    </ul>
+    
+    <a th:href="@{/recipes}">Назад к рецептам</a>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

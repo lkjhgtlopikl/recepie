@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Редактировать рецепт</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div class="container">
+    <h1>Редактировать рецепт</h1>
+
+    <form th:action="@{/recipes/edit/{id}(id=${recipe.recipeId})}" th:object="${recipe}" method="post">
+        <!-- Основная информация -->
+        <div class="form-group">
+            <label>Название рецепта:*</label>
+            <input type="text" th:field="*{title}" required maxlength="255">
+        </div>
+
+        <div class="form-group">
+            <label>Описание:</label>
+            <textarea th:field="*{description}" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Инструкции приготовления:*</label>
+            <textarea th:field="*{instructions}" required rows="6"></textarea>
+        </div>
+
+        <!-- Мета-информация -->
+        <div class="form-row">
+            <div class="form-group">
+                <label>Время приготовления (мин):*</label>
+                <input type="number" th:field="*{cookingTime}" required min="1">
+            </div>
+
+            <div class="form-group">
+                <label>Количество порций:*</label>
+                <input type="number" th:field="*{servings}" required min="1">
+            </div>
+
+            <div class="form-group">
+                <label>Сложность:*</label>
+                <select th:field="*{difficulty}" required>
+                    <option th:each="diff : ${difficulties}"
+                            th:value="${diff}"
+                            th:text="${diff}"
+                            th:selected="${recipe.difficulty == diff}"></option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Связи -->
+        <div class="form-row">
+            <div class="form-group">
+                <label>Автор:*</label>
+                <select th:field="*{author.userId}" required>
+                    <option th:each="user : ${users}"
+                            th:value="${user.userId}"
+                            th:text="${user.username}"
+                            th:selected="${recipe.author.userId == user.userId}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Кухня:*</label>
+                <select th:field="*{cuisine.cuisineId}" required>
+                    <option th:each="cuisine : ${cuisines}"
+                            th:value="${cuisine.cuisineId}"
+                            th:text="${cuisine.name}"
+                            th:selected="${recipe.cuisine.cuisineId == cuisine.cuisineId}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group">
+                <label>Тип приготовления:*</label>
+                <select th:field="*{typeCooking.typeId}" required>
+                    <option th:each="type : ${types}"
+                            th:value="${type.typeId}"
+                            th:text="${type.name}"
+                            th:selected="${recipe.typeCooking.typeId == type.typeId}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Категория:*</label>
+                <select th:field="*{category.categoryId}" required>
+                    <option th:each="category : ${categories}"
+                            th:value="${category.categoryId}"
+                            th:text="${category.name}"
+                            th:selected="${recipe.category.categoryId == category.categoryId}"></option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Кнопки -->
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Обновить рецепт</button>
+            <a th:href="@{/recipes/{id}(id=${recipe.recipeId})}" class="btn btn-outline">Отмена</a>
+        </div>
+    </form>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>
