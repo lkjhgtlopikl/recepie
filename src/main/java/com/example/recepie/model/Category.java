@@ -14,7 +14,7 @@ public class Category {
     @Column(nullable = false, unique = true)
     private String name;
 
-    // ОДНОНАПРАВЛЕННАЯ связь - убираем mappedBy
+    // ОДНОНАПРАВЛЕННАЯ связь
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Recipe> recipes = new HashSet<>();
 

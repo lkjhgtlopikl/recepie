@@ -9,9 +9,7 @@
 
 <div class="container">
     <h1>Добавить новый рецепт</h1>
-
     <form th:action="@{/recipes/add}" th:object="${recipe}" method="post">
-        <!-- Основная информация -->
         <div class="form-group">
             <label>Название рецепта:*</label>
             <input type="text" th:field="*{title}" required maxlength="255" placeholder="Введите название рецепта">
@@ -28,7 +26,6 @@
                       rows="6"></textarea>
         </div>
 
-        <!-- Мета-информация -->
         <div class="form-row">
             <div class="form-group">
                 <label>Время приготовления (мин):*</label>
@@ -51,7 +48,6 @@
             </div>
         </div>
 
-        <!-- Связи -->
         <div class="form-row">
             <div class="form-group">
                 <label>Автор:*</label>
@@ -95,8 +91,6 @@
                 </select>
             </div>
         </div>
-
-        <!-- Кнопки -->
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Сохранить рецепт</button>
             <a th:href="@{/recipes}" class="btn btn-outline">Отмена</a>
