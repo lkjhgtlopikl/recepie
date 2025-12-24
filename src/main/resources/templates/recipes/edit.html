@@ -14,7 +14,7 @@
 <div class="container">
     <h1>Редактировать рецепт</h1>
 
-    <form th:action="@{/recipes/edit/{id}(id=${recipe.recipeId})}" th:object="${recipe}" method="post">
+    <form th:action="@{/recipes/edit/{id}(id=${recipe.id})}" th:object="${recipe}" method="post">
         <!-- Основная информация -->
         <div class="form-group">
             <label>Название рецепта:*</label>

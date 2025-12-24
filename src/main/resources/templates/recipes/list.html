@@ -29,9 +29,9 @@
                     <span th:text="${recipe.difficulty}"></span>
                 </div>
                 <div class="recipe-actions">
-                    <a th:href="@{/recipes/{id}(id=${recipe.recipeId})}" class="btn btn-sm">Подробнее</a>
-                    <a th:href="@{/recipes/edit/{id}(id=${recipe.recipeId})}" class="btn btn-sm btn-secondary">Редактировать</a>
-                    <a th:href="@{/recipes/delete/{id}(id=${recipe.recipeId})}" class="btn btn-sm btn-danger">Удалить</a>
+                    <a th:href="@{/recipes/{id}(id=${recipe.id})}" class="btn btn-sm">Подробнее</a>
+                    <a th:href="@{/recipes/edit/{id}(id=${recipe.id})}" class="btn btn-sm btn-secondary">Редактировать</a>
+                    <a th:href="@{/recipes/delete/{id}(id=${recipe.id})}" class="btn btn-sm btn-danger">Удалить</a>
                 </div>
             </div>
         </div>

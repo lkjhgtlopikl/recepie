@@ -26,20 +26,21 @@
                 <p th:text="${recipe.description}"></p>
             </div>
             
-            <div class="instructions">
+           
+             <div class="instructions">
                 <h3>Инструкции</h3>
                 <p th:text="${recipe.instructions}"></p>
             </div>
             
-            <div th:if="${not #lists.isEmpty(recipe.ingredients)}" class="ingredients">
+            <!-- <div th:if="${not #lists.isEmpty(recipe.ingredients)}" class="ingredients">
                 <h3>Ингредиенты</h3>
                 <ul>
                     <li th:each="ingredient : ${recipe.ingredients}" th:text="${ingredient.name}"></li>
                 </ul>
-            </div>
+            </div> -->
             
             <div class="actions">
-                <a th:href="@{/recipes/edit/{id}(id=${recipe.recipeId})}" class="btn btn-secondary">Редактировать</a>
+                <a th:href="@{/recipes/edit/{id}(id=${recipe.id})}" class="btn btn-secondary">Редактировать</a>
                 <a th:href="@{/recipes}" class="btn btn-outline">Назад к списку</a>
             </div>
         </div>
