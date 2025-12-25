@@ -10,33 +10,27 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-    
     @Autowired
     private UserService userService;
-
     @GetMapping
     public String getAllUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "users/list";
     }
-
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
         model.addAttribute("user", new User());
         return "users/register";
     }
-
     @PostMapping("/register")
     public String registerUser(@ModelAttribute User user) {
         userService.saveUser(user);
         return "redirect:/users/login";
     }
-
     @GetMapping("/login")
     public String showLoginForm() {
         return "users/login";
     }
-
     @PostMapping("/login")
     public String loginUser(@RequestParam String username, 
                            @RequestParam String password, 
@@ -49,7 +43,6 @@ public class UserController {
             return "users/login";
         }
     }
-
     @GetMapping("/{id}")
     public String getUserProfile(@PathVariable Long id, Model model) {
         User user = userService.getUserById(id);

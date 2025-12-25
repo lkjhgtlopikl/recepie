@@ -1,5 +1,4 @@
 package com.example.recepie.controller;
-
 import com.example.recepie.model.Category;
 import com.example.recepie.model.Cuisine;
 import com.example.recepie.model.TypeCooking;
@@ -10,15 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 @Controller
 @RequestMapping("/management")
 public class ManagementController {
-    
     @Autowired private CuisineRepository cuisineRepository;
     @Autowired private TypeCookingRepository typeCookingRepository;
     @Autowired private CategoryRepository categoryRepository;
-
     // Кухни
     @GetMapping("/cuisines")
     public String listCuisines(Model model) {
@@ -26,7 +22,6 @@ public class ManagementController {
         model.addAttribute("newCuisine", new Cuisine());
         return "management/cuisines";
     }
-
     @PostMapping("/cuisines/add")
     public String addCuisine(@ModelAttribute Cuisine cuisine) {
         if (!cuisineRepository.existsByName(cuisine.getName())) {
@@ -34,13 +29,11 @@ public class ManagementController {
         }
         return "redirect:/management/cuisines";
     }
-
     @GetMapping("/cuisines/delete/{id}")
     public String deleteCuisine(@PathVariable Long id) {
         cuisineRepository.deleteById(id);
         return "redirect:/management/cuisines";
     }
-
     // Типы приготовления
     @GetMapping("/types")
     public String listTypes(Model model) {
@@ -48,7 +41,6 @@ public class ManagementController {
         model.addAttribute("newType", new TypeCooking());
         return "management/types";
     }
-
     @PostMapping("/types/add")
     public String addType(@ModelAttribute TypeCooking type) {
         if (!typeCookingRepository.existsByName(type.getName())) {
@@ -56,13 +48,11 @@ public class ManagementController {
         }
         return "redirect:/management/types";
     }
-
     @GetMapping("/types/delete/{id}")
     public String deleteType(@PathVariable Long id) {
         typeCookingRepository.deleteById(id);
         return "redirect:/management/types";
     }
-
     // Категории
     @GetMapping("/categories")
     public String listCategories(Model model) {
@@ -70,7 +60,6 @@ public class ManagementController {
         model.addAttribute("newCategory", new Category());
         return "management/categories";
     }
-
     @PostMapping("/categories/add")
     public String addCategory(@ModelAttribute Category category) {
         if (!categoryRepository.existsByName(category.getName())) {
@@ -78,7 +67,6 @@ public class ManagementController {
         }
         return "redirect:/management/categories";
     }
-
     @GetMapping("/categories/delete/{id}")
     public String deleteCategory(@PathVariable Long id) {
         categoryRepository.deleteById(id);

@@ -10,39 +10,30 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-
 <div class="container">
     <h1>Редактировать рецепт</h1>
-
     <form th:action="@{/recipes/edit/{id}(id=${recipe.id})}" th:object="${recipe}" method="post">
-        <!-- Основная информация -->
         <div class="form-group">
             <label>Название рецепта:*</label>
             <input type="text" th:field="*{title}" required maxlength="255">
         </div>
-
         <div class="form-group">
             <label>Описание:</label>
             <textarea th:field="*{description}" rows="3"></textarea>
         </div>
-
         <div class="form-group">
             <label>Инструкции приготовления:*</label>
             <textarea th:field="*{instructions}" required rows="6"></textarea>
         </div>
-
-        <!-- Мета-информация -->
         <div class="form-row">
             <div class="form-group">
                 <label>Время приготовления (мин):*</label>
                 <input type="number" th:field="*{cookingTime}" required min="1">
             </div>
-
             <div class="form-group">
                 <label>Количество порций:*</label>
                 <input type="number" th:field="*{servings}" required min="1">
             </div>
-
             <div class="form-group">
                 <label>Сложность:*</label>
                 <select th:field="*{difficulty}" required>
@@ -53,8 +44,6 @@
                 </select>
             </div>
         </div>
-
-        <!-- Связи -->
         <div class="form-row">
             <div class="form-group">
                 <label>Автор:*</label>
@@ -65,7 +54,6 @@
                             th:selected="${recipe.author.userId == user.userId}"></option>
                 </select>
             </div>
-
             <div class="form-group">
                 <label>Кухня:*</label>
                 <select th:field="*{cuisine.cuisineId}" required>
@@ -76,7 +64,6 @@
                 </select>
             </div>
         </div>
-
         <div class="form-row">
             <div class="form-group">
                 <label>Тип приготовления:*</label>
@@ -87,7 +74,6 @@
                             th:selected="${recipe.typeCooking.typeId == type.typeId}"></option>
                 </select>
             </div>
-
             <div class="form-group">
                 <label>Категория:*</label>
                 <select th:field="*{category.categoryId}" required>
@@ -98,15 +84,12 @@
                 </select>
             </div>
         </div>
-
-        <!-- Кнопки -->
         <div class="form-actions">
             <button type="submit" class="btn btn-primary">Обновить рецепт</button>
-            <a th:href="@{/recipes/{id}(id=${recipe.recipeId})}" class="btn btn-outline">Отмена</a>
+            <a th:href="@{/recipes/{id}(id=${recipe.id})}" class="btn btn-outline">Отмена</a>
         </div>
     </form>
 </div>
-
 <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

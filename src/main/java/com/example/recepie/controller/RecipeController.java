@@ -12,11 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 @Controller
 @RequestMapping("/recipes")
 public class RecipeController {
-
     @Autowired
     private RecipeService recipeService;
     @Autowired
@@ -27,20 +25,17 @@ public class RecipeController {
     private CuisineRepository cuisineRepository;
     @Autowired
     private TypeCookingRepository typeCookingRepository;
-
     @GetMapping
     public String getAllRecipes(Model model) {
         model.addAttribute("recipes", recipeService.getAllRecipes());
         return "recipes/list";
     }
-
     @GetMapping("/{id}")
     public String getRecipe(@PathVariable Long id, Model model) {
         Recipe recipe = recipeService.getRecipeById(id);
         model.addAttribute("recipe", recipe);
         return "recipes/view";
     }
-
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("recipe", new Recipe());
@@ -52,7 +47,6 @@ public class RecipeController {
         model.addAttribute("users", userService.getAllUsers());
         return "recipes/add";
     }
-
     @PostMapping("/add")
     public String addRecipe(@ModelAttribute Recipe recipe) {
         System.out.println("Instructions length: " +
@@ -66,7 +60,6 @@ public class RecipeController {
         recipeService.saveRecipe(recipe);
         return "redirect:/recipes";
     }
-
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
         Recipe recipe = recipeService.getRecipeById(id);
@@ -78,20 +71,17 @@ public class RecipeController {
         model.addAttribute("users", userService.getAllUsers());
         return "recipes/edit";
     }
-
     @PostMapping("/edit/{id}")
     public String editRecipe(@PathVariable Long id, @ModelAttribute Recipe recipe) {
         recipe.setId(id);
         recipeService.saveRecipe(recipe);
         return "redirect:/recipes";
     }
-
     @GetMapping("/delete/{id}")
     public String deleteRecipe(@PathVariable Long id) {
         recipeService.deleteRecipe(id);
         return "redirect:/recipes";
     }
-
     @GetMapping("/search")
     public String searchRecipes(@RequestParam String query, Model model) {
         model.addAttribute("recipes", recipeService.searchRecipes(query));

@@ -6,18 +6,15 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
-
 <div class="container">
     <h1>Список пользователей</h1>
 
     <div class="user-actions">
         <a th:href="@{/users/register}" class="btn btn-primary">Добавить пользователя</a>
     </div>
-
     <div th:if="${#lists.isEmpty(users)}" class="empty-state">
         <p>Пользователей пока нет</p>
     </div>
-
     <div th:unless="${#lists.isEmpty(users)}" class="users-grid">
         <div th:each="user : ${users}" class="user-card">
             <h3 th:text="${user.username}"></h3>
@@ -31,7 +28,6 @@
         </div>
     </div>
 </div>
-
 <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
